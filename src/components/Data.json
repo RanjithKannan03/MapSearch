@@ -1,0 +1,285 @@
+[
+  {
+    "eventName": "Aquajet",
+    "description": "N BLOCK GROUND",
+    "building": "nBlock"
+  },
+  {
+    "eventName": "Asimo Bot",
+    "description": "Y -201",
+    "building": "yBlock"
+  },
+  {
+    "eventName": "Auto Minds mastery Challenge: Engine Craft Edition",
+    "description": "AUTOMATIVE SIMULATION LABS AND 2+3 WHEELS LAB",
+    "building": ""
+  },
+  {
+    "eventName": "Auto-Mania",
+    "description": "AUTOMOBILE SIMULATION LAB AND K BLOCK (405,503,504)",
+    "building": "kBlock"
+  },
+  {
+    "eventName": "Bounty Hxnt",
+    "description": "PROGRAMMING LAB",
+    "building": "eBlock"
+  },
+  {
+    "eventName": "Chromaquest",
+    "description": "G BLOCK (501,502)",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Civil showdown",
+    "description": "J BLOCK (J313,314)",
+    "building": "jBlock"
+  },
+  {
+    "eventName": "Civilphilia",
+    "description": "K BLOCK ( 2 ROOMS ) + CIVIL LAB & SEMINAR HALL",
+    "building": "kBlock"
+  },
+  {
+    "eventName": "Codebuster",
+    "description": "G-509",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Critical Thinker",
+    "description": "G-401",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Dimensions in Design",
+    "description": "A & F CAD LAB",
+    "building": ""
+  },
+  {
+    "eventName": "DrapeTales : Where Every Creator Tells A Tale",
+    "description": "G BLOCK (604,605)",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Dynamix",
+    "description": "G BLOCK (506,507)",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Eco couture Canvas - Sustainable Creation",
+    "description": "M BLOCK 2ND FLOOR LAB",
+    "building": "mBlock"
+  },
+  {
+    "eventName": "Etheral Cosmos",
+    "description": "G-302",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Forensicist",
+    "description": "J BLOCK (411-15)",
+    "building": "jBlock"
+  },
+  {
+    "eventName": "Futuristic Techo",
+    "description": "G BLOCK(508,509)",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "InnovateX",
+    "description": "H BLOCK (201,202,203)",
+    "building": "hBlock"
+  },
+  {
+    "eventName": "Innovation Forge",
+    "description": "MECH DESIGN LAB",
+    "building": ""
+  },
+  {
+    "eventName": "Kriya Open Quiz",
+    "description": "F BLOCK ASSEMBLY",
+    "building": "fBlock"
+  },
+  {
+    "eventName": "Load Glider",
+    "description": "CAE (K BLOCK) & N BLOCK GROUND ",
+    "building": "kBlock"
+  },
+  {
+    "eventName": "Locked & Loaded",
+    "description": "H BLOCK (201,202,203)",
+    "building": "hBlock"
+  },
+  {
+    "eventName": "Mechmaniacs",
+    "description": "J - 314",
+    "building": "jBlock"
+  },
+  {
+    "eventName": "Mid Day Madness",
+    "description": "G - 301",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Mystery Quest",
+    "description": "G-505",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "NexTech - Shaping tomorrow, today",
+    "description": "CC LAB & PROGRAMMING LAB",
+    "building": "eBlock"
+  },
+  {
+    "eventName": "Nowornever Nexus",
+    "description": "H BLOCK (206,207)",
+    "building": "hBlock"
+  },
+  {
+    "eventName": "Pixel To Prototype",
+    "description": "CC LAB 1 & 2",
+    "building": "eBlock"
+  },
+  {
+    "eventName": "Quotient",
+    "description": "G BLOCK (304,308)",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "RC Grand Prix",
+    "description": "G - 601",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Robot Grand Prix",
+    "description": "G - 401",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Robowars",
+    "description": "J-314",
+    "building": "jBlock"
+  },
+  {
+    "eventName": "Sci - Fiesta ",
+    "description": " G BLOCK (401,402,403)",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Speed Drifters",
+    "description": " N BLOCK",
+    "building": "nBlock"
+  },
+  {
+    "eventName": "SPO - (R) - TI - FY",
+    "description": "G- 601",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Tech - O - Mate",
+    "description": "G BLOCK (408,409)",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Tech Quest",
+    "description": "SKAVA LAB ",
+    "building": "eBlock"
+  },
+  {
+    "eventName": "Tech Spark",
+    "description": "G - 503 & KEYSIGHT MPLS LABS",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Techvisions",
+    "description": "H-207",
+    "building": "hBlock"
+  },
+  {
+    "eventName": "Tradtitonal Games Galore",
+    "description": "G BLOCK (401,402)",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Try and triumph",
+    "description": "J BLOCK(411,412,413,414,415)",
+    "building": "jBlock"
+  },
+  {
+    "eventName": "Witty Mindz",
+    "description": "K BLOCK (501,502)",
+    "building": "kBlock"
+  }
+  ,
+    {
+      "eventName": "A Block",
+      "description": "A Block",
+      "building": "aBlock"
+    },
+    {
+      "eventName": "B Block",
+      "description": "B Block",
+      "building": "bBlock"
+    },
+    {
+      "eventName": "C Block",
+      "description": "C Block",
+      "building": "cBlock"
+    },
+    {
+      "eventName": "D Block",
+      "description": "D Block",
+      "building": "dBlock"
+    },
+    {
+      "eventName": "E Block",
+      "description": "E Block",
+      "building": "eBlock"
+    },
+    {
+      "eventName": "F Block",
+      "description": "F Block",
+      "building": "fBlock"
+    },
+    {
+      "eventName": "G Block",
+      "description": "G Block",
+      "building": "gBlock"
+    },
+    {
+      "eventName": "H Block",
+      "description": "H Block",
+      "building": "hBlock"
+    },
+    {
+      "eventName": "I Block",
+      "description": "I Block",
+      "building": "iBlock"
+    },
+    {
+      "eventName": "J Block",
+      "description": "J Block",
+      "building": "jBlock"
+    },
+    {
+      "eventName": "K Block",
+      "description": "K Block",
+      "building": "kBlock"
+    },
+    {
+      "eventName": "L Block",
+      "description": "L Block",
+      "building": "lBlock"
+    },
+    {
+      "eventName": "M Block",
+      "description": "M Block",
+      "building": "mBlock"
+    },
+    {
+      "eventName": "N Block",
+      "description": "N Block",
+      "building": "nBlock"
+    }
+  
+  
+]
