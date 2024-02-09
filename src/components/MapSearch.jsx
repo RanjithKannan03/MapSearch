@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import * as THREE from 'three';
 
 import BookData from './Data.json'
 
+// import CannonDebugRenderer from 'cannon-es-debugger';
 import * as CANNON from 'cannon-es';
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 
 
 import { MapControls } from 'three/examples/jsm/controls/MapControls.js';
@@ -61,8 +64,8 @@ const MapSearch = () => {
     var drivingMode = false
 
 
-const map = new Map();
-const map2 = new Map();
+// const map = new Map();
+// const map2 = new Map();
 
 
 // const loader = new GLTFLoader();
@@ -222,8 +225,9 @@ physicsWorld.defaultContactMaterial = Cmaterial
     
     const camera = new helicam()
     scene.add(camera)
-    camera.position.set(-10,40,-60)
-
+    camera.position.set(-20,19,-60)
+    
+  
     
     
     
@@ -252,7 +256,7 @@ physicsWorld.defaultContactMaterial = Cmaterial
       
       const maxSteerVal = Math.PI / 4;
       const maxForce = 110;
-      let boost = 2;
+      // let boost = 2;
       var movingF = false
       
       switch (event.key) {
@@ -332,9 +336,9 @@ physicsWorld.defaultContactMaterial = Cmaterial
             sound.play()
             
             break;
-          }break;
-
-          case 'g':
+          }
+          
+          case 'h':
             {if(drivingMode)
                 horn.play();
             }
@@ -386,18 +390,56 @@ physicsWorld.defaultContactMaterial = Cmaterial
     
     control.maxPolarAngle = Math.PI * 0.4
 
+    const textureLoader = new THREE.TextureLoader();
+const matcapTexture = textureLoader.load('static/textures/textures/matcaps/1.png');
+// console.log(matcapTexture);
+
+const material = new THREE.MeshMatcapMaterial();
+material.matcap = matcapTexture
+
+// let texts = []
+
+function createAlphabet(letter, position) {
+    const loader = new FontLoader();
+    loader.load('/static/fonts/font.json', function (font) {
+        const textGeometry = new TextGeometry(letter, {
+            font: font,
+            size: 2,
+            height: 0.2,
+            curveSegments: 12,
+            bevelEnabled: true,
+            bevelThickness: 0.1,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 5
+        });
+        textGeometry.center();
+        const text = new THREE.Mesh(textGeometry, material);
+        text.castShadow = true
+        text.rotation.y = -Math.PI/2
+        text.position.copy(position)
+        scene.add(text);
+        // texts.add(text)
+    });
+}
+
+
     const eblock = createStructure(16,8,9,'eBlock')
     eblock.mesh.position.set(-0.558,4,11.641)
     eblock.body.position.set(-0.558,4,11.641)
+    createAlphabet('E',new THREE.Vector3(-0.588,10,11.641))
+    
 
     const iblock = createStructure(7, 28, 8, 'iBlock');
   iblock.body.position.set(40, 10, -20)
 objArr.push(iblock)
+createAlphabet('I',new THREE.Vector3(40, 9, -20))
 
 
 const dblock = createStructure(3, 7.5, 3, 'dBlock');
 dblock.body.position.set(10, 10, -25.9)
 objArr.push(dblock)
+createAlphabet('D',new THREE.Vector3(10, 4, -25.9))
 
 const d2block = createStructure(3, 6.5, 3, 'dBlock');
 d2block.body.position.set(10, 10, -14.7)
@@ -406,14 +448,18 @@ objArr.push(d2block)
 const ablock = createStructure(10, 14, 8, 'aBlock');
 ablock.body.position.set(15, 10, -55)
 objArr.push(ablock)
+createAlphabet('A',new THREE.Vector3(15, 9, -55))
 
 const nblock = createStructure(10, 14, 8, 'nBlock');
 nblock.body.position.set(2, 10, -55)
 objArr.push(nblock)
+createAlphabet('N',new THREE.Vector3(2, 9, -55))
+
 
 const bblock = createStructure(10, 14, 8, 'bBlock');
 bblock.body.position.set(45, 10, -55)
 objArr.push(bblock)
+createAlphabet('B',new THREE.Vector3(45, 9, -55))
 
 const rroom = createStructure(5, 5, 5, 'bBlock');
 rroom.body.position.set(35, 10, -51)
@@ -432,31 +478,38 @@ scene.add(tree)
     const fblock = createStructure(7,14,8,'fBlock');
     fblock.body.position.set(16.066,10,3)
     objArr.push(fblock)
+    createAlphabet('F',new THREE.Vector3(16.066,9,3))
     
     const behindg = createStructure(9,6,4,'tBlock');
     behindg.body.position.set(20.093,1.0,16.651)
     objArr.push(behindg)
+    createAlphabet('T',new THREE.Vector3(20.093,5.0,16.651))
     // behindg.body.position.set()
 
     const jblock = createStructure(9,6,9,'jBlock')
     jblock.body.position.set(18.372,10,25.256)
     objArr.push(jblock)
+    createAlphabet('J',new THREE.Vector3(18.372,10,25.256))
 
     const eblockext = createStructure(16,8,13,'kBlock');
     eblockext.body.position.set(-0.558,20,21)
     objArr.push(eblockext)
+    createAlphabet('K',new THREE.Vector3(-0.558,14,21))
     const mblock = createStructure(16,8,13,'mBlock');
     mblock.body.position.set(-0.558,20,30)
     objArr.push(mblock)
+    createAlphabet('M',new THREE.Vector3(-0.558,14,30))
 
     // const gblockb = createStructure(7,8,4);
     const gblock = createStructure(14,7,8.8,'gBlock')
     gblock.body.position.set(14.936,10,-7.434)
     objArr.push(gblock)
+    createAlphabet('G',new THREE.Vector3(14.936,10,-7.434))
 
     const yblock = createStructure(20,7,8,'yBlock')
     yblock.body.position.set(18.377,20,-33.246)
     objArr.push(yblock);
+    createAlphabet('Y',new THREE.Vector3(18.377,9,-33.246))
 
     for(const obj of objArr){
       originalColors.set(obj.mesh,obj.color)
@@ -497,24 +550,24 @@ const sound = new THREE.Audio( listener );
       horn.setVolume(0.6)
     })
 
-    const hitSound = new Audio('/static/car-hit-1.mp3')
+    // const hitSound = new Audio('/static/car-hit-1.mp3')
 
 
 
-    const playHitSound = (collision) =>
-  {
-    const impactStrength = collision.contact.getImpactVelocityAlongNormal()
+  //   const playHitSound = (collision) =>
+  // {
+  //   const impactStrength = collision.contact.getImpactVelocityAlongNormal()
 
 
-        if(impactStrength > 0.5){        
-          hitSound.volume = Math.random()
-        hitSound.currentTime = 0
-        hitSound.play()
-        }
+  //       if(impactStrength > 0.5){        
+  //         hitSound.volume = Math.random()
+  //       hitSound.currentTime = 0
+  //       hitSound.play()
+  //       }
     
-  }
+  // }
 
-  vehicle.carBody.addEventListener('collide',playHitSound)
+  // vehicle.carBody.addEventListener('collide',playHitSound)
 
 
     for(let i = 0;i<objArr.length;i++){
@@ -525,80 +578,83 @@ const sound = new THREE.Audio( listener );
     const clock = new THREE.Clock();
     
 
-    const mouse = new THREE.Vector2()
-let prevIntersect = null;
-window.addEventListener('mousemove', (event) =>
-{
-    mouse.x = event.clientX / sizes.width * 2 - 1
-    mouse.y = - (event.clientY / sizes.height) * 2 + 1
-})
+    // const mouse = new THREE.Vector2()
+// let prevIntersect = null;
+// window.addEventListener('mousemove', (event) =>
+// {
+//     mouse.x = event.clientX / sizes.width * 2 - 1
+//     mouse.y = - (event.clientY / sizes.height) * 2 + 1
+// })
 
     renderer.setPixelRatio(Math.min(2,window.devicePixelRatio))
     renderer.render(scene,camera);
 
-    window.addEventListener('click', () =>
-{
+//     window.addEventListener('click', () =>
+// {
   
-    if(currentIntersect)
-    {
+//     if(currentIntersect)
+//     {
    
-        prevIntersect = currentIntersect.object
+//         prevIntersect = currentIntersect.object
         
-        // panelReset(currentIntersect.object)
-    }
+//         // panelReset(currentIntersect.object)
+//     }
 
-    if(prevIntersect){
-        console.log(prevIntersect.name)
-    }
-})
+//     if(prevIntersect){
+//         console.log(prevIntersect.name)
+//     }
+// })
 
-var onFocus = null;
-
-
-
-obj.add = ()=>{
-  addNames()
-}
+// var onFocus = null;
 
 
-const addNames = ()=>{
 
-    if(prevIntersect != null){
-       for(const obje of objArr){
-          if(obje.mesh === prevIntersect){
-              if(!present(obje.roomName,obj.params.roomName)){
-                obje.roomName.push(obj.params.roomName)
+// obj.add s
+// const addNames = ()=>{
+
+//     if(prevIntersect != null){
+//        for(const obje of objArr){
+//           if(obje.mesh === prevIntersect){
+//               if(!present(obje.roomName,obj.params.roomName)){
+//                 obje.roomName.push(obj.params.roomName)
                 
-              }else{
-                continue;
-              }
-          }
-          }
-       }
-    }
+//               }else{
+//                 continue;
+//               }
+//           }
+//           }
+//        }
+//     }
 
 
 
-const present = (arr,name)=>{
-  for(const names of arr){
-    if(names === name){
-      return true;
-    }
-  }
+// const present = (arr,name)=>{
+//   for(const names of arr){
+//     if(names === name){
+//       return true;
+//     }
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
 
-    const bridgeShape = new CANNON.Box(new CANNON.Vec3(17.5,3,4))
+    const bridgeShape = new CANNON.Box(new CANNON.Vec3(4.5,1,2))
     const bridgeBody = new CANNON.Body({
       shape:bridgeShape,
       mass:0,
-      position: new CANNON.Vec3(-22.5,0,0)
+      position: new CANNON.Vec3(-25.5,0,4)
+    })
+
+    const bridgeShape2 = new CANNON.Box(new CANNON.Vec3(4.5,1,2))
+    const bridgeBody2 = new CANNON.Body({
+      shape:bridgeShape2,
+      mass:0,
+      position: new CANNON.Vec3(-1,0,4)
     })
 
     physicsWorld.addBody(bridgeBody)
-
+    physicsWorld.addBody(bridgeBody2)
 
     
     pedestal.rotation.z = Math.PI
@@ -620,29 +676,43 @@ const present = (arr,name)=>{
     
     physicsWorld.addBody(pedestalBody)
 
-  
-
    
+// control.enableZoom = false;
+control.target.set(0, 0, 0); // Set it to your desired target point
+
+// Set the minimum and maximum distances for zooming
+control.minDistance = 5; // Set your desired minimum distance
+control.maxDistance = 90;
+
+// const fontLoader = new FontLoader()
+
+
+
+
+
+
+
     
 
+// const debugRenderer = new CannonDebugRenderer(scene, physicsWorld);
     const animate = () => {
-      raycaster.setFromCamera(mouse,camera);
-      const objectsToTest = []
-      for(const objects of objArr){
-        objectsToTest.push(objects.mesh)
-      }
-      // cannonDebugger.update()
+      // raycaster.setFromCamera(mouse,camera);
+      // const objectsToTest = []
+      // for(const objects of objArr){
+      //   objectsToTest.push(objects.mesh)
+      // }
+
       
 
-      const intersects = raycaster.intersectObjects(objectsToTest)
-      if(intersects.length)
-      {
-          currentIntersect = intersects[0]
-      }
-      else
-      {
-          currentIntersect = null
-      }
+      // const intersects = raycaster.intersectObjects(objectsToTest)
+      // if(intersects.length)
+      // {
+      //     currentIntersect = intersects[0]
+      // }
+      // else
+      // {
+      //     currentIntersect = null
+      // }
 
       
       const elapsedTime = clock.getElapsedTime();
@@ -655,8 +725,8 @@ const present = (arr,name)=>{
       for( const obj of objArr){
         obj.mesh.position.copy(obj.body.position);
         obj.mesh.quaternion.copy(obj.body.quaternion)
-        map.set(obj.mesh,obj.name)
-        map2.set(obj.mesh,obj.body)
+        // map.set(obj.mesh,obj.name)
+        // map2.set(obj.mesh,obj.body)
        
       }
       for(const obj of staticObjects){
@@ -669,7 +739,7 @@ const present = (arr,name)=>{
       a.quaternion.copy(vehicle.carBody.quaternion)
 
       
-      
+      // console.log(camera.position)
       if(drivingMode)
       {
       
@@ -684,14 +754,19 @@ const present = (arr,name)=>{
       
       }else{
         control.enabled = true
+        // camera.position.set(-10,40,-60)
         sound.pause()
       }
-      
+
+      // console.log()
+      // restrictZoom(camera,tree.position, minZoom, maxZoom);
       renderer.render(scene,camera);
      
       window.requestAnimationFrame(animate);
 
     };
+
+    // restrictZoom(camera,tree.position, minZoom, maxZoom);
     animate();
 
     // Clean up function
@@ -708,9 +783,9 @@ const present = (arr,name)=>{
     <Paper style={{ margin: '20px', padding: '20px', borderRadius:'10px' }}>
       <Typography variant="h4">PSG College of Technology</Typography>
       <Typography variant="body1">
-        pinch to zoom out
+        pinch to zoom out ,
       {!mobile &&
-        "press ',' to start the vehicle , a, s, d, f to move"
+        "click and drag to navigate the map, command + click to rotate , press ',' to start the vehicle , a, s, d, f to move , h for horn"
 }
       </Typography>
     </Paper>
