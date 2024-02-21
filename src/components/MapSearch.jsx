@@ -846,7 +846,7 @@ camera.position.set(
   return <React.Fragment>
     
       
-        <div ref={containerRef} style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }} />;
+        <div ref={containerRef} style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }} />
     {/* <Paper style={{ margin: '20px', padding: '20px', borderRadius:'10px' }}>
       <Typography variant="h4">PSG College of Technology</Typography>
       <Typography variant="body1">
