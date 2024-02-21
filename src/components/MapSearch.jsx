@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef} from 'react';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import * as THREE from 'three';
 
@@ -27,14 +27,20 @@ import { load } from '../library/utils/loader.js';
 import { naturalEffect } from '../library/light/natural.js';
 
 import SearchBar from './SearchBar.jsx';
-import { Paper, Typography } from '@mui/material';
+// import { Paper, Typography } from '@mui/material';
+// import { ControlPointSharp } from '@mui/icons-material';
 
 
 
 const MapSearch = () => {
   const containerRef = useRef(null);
-  const [mobile , isMobile] = useState(false);
-  const [objArr , setObjArr] = useState([]);
+  const clearSearch = useRef(false);
+  const objArr = useRef([]);
+  // const searched =
+  const sceneRef = useRef(null);
+  // const scene = useRef
+  // const [mobile , isMobile] = useState(false);
+  // const [objArr , setObjArr] = useState([]);
   // const [originalColors , setOriginalColor]
   // let objArr = [];
   // var originalColors = new Map();
@@ -43,29 +49,36 @@ const MapSearch = () => {
     // console.log('hi in search building')
 
     // console.log(objArr)
-    for(const buildings of objArr){
+    for(const buildings of objArr.current){
         // console.log(buildings)
+        // console.log(camera.position)
         if(buildings.name === value){
           // console.log(value)
           // console.log(buildings.name)
+          clearSearch.current = false
+          sceneRef.current = buildings
           buildings.mesh.material.color.set(0xff0000)
         }
     }
   }
+
+  const clearedSearch = ()=>{
+    clearSearch.current = true
+  }
   const clear = ()=>{
     // console.log("hi in clear")
-  for(let obj of objArr){
+  for(let obj of objArr.current){
     obj.mesh.material.color.set(0xffffff)
   }
 }
+
+useEffect(() => {
+  
   let scene,camera ,renderer;
-
-  useEffect(() => {
-
     
     scene = new THREE.Scene();
-    if(window.innerWidth < 768)
-      isMobile(true)
+    // if(window.innerWidth < 768)
+    //   isMobile(true)
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     containerRef.current.appendChild(renderer.domElement);
@@ -90,10 +103,10 @@ var arc = load('/static/archblend.glb')
 
 const staticObjects = [];
 
-const raycaster = new THREE.Raycaster()
-let currentIntersect = null
-const rayDirection = new THREE.Vector3(10,0,0)
-rayDirection.normalize();
+// const raycaster = new THREE.Raycaster()
+// let currentIntersect = null
+// const rayDirection = new THREE.Vector3(10,0,0)
+// rayDirection.normalize();
 
 
 
@@ -234,7 +247,8 @@ physicsWorld.defaultContactMaterial = Cmaterial
     
     camera = new helicam()
     scene.add(camera)
-    camera.position.set(-20,19,-60)
+    camera.position.set(-90,50,-100)
+    // camera.lookAt(arc.position)
     
   
     
@@ -242,10 +256,10 @@ physicsWorld.defaultContactMaterial = Cmaterial
     
     window.addEventListener('resize', () =>
     {
-      if(window.innerWidth < 768)
-        isMobile(true);
-      else
-        isMobile(false);
+      // if(window.innerWidth < 768)
+      //   isMobile(true);
+      // else
+      //   isMobile(false);
       sizes.width = window.innerWidth
       sizes.height = window.innerHeight
       
@@ -266,12 +280,12 @@ physicsWorld.defaultContactMaterial = Cmaterial
       const maxSteerVal = Math.PI / 4;
       const maxForce = 110;
       // let boost = 2;
-      var movingF = false
+      // var movingF = false
       
       switch (event.key) {
     
         case 'w':
-          if(event.shiftKey == true && drivingMode)
+          if(event.shiftKey === true && drivingMode)
           {
             if(offset < 6)
               offset += 0.1
@@ -284,7 +298,7 @@ physicsWorld.defaultContactMaterial = Cmaterial
             vehicle.vehicle.setWheelForce(maxForce, 2);
             vehicle.vehicle.setWheelForce(maxForce, 3);
             
-            movingF = true
+            // movingF = true
             
             
             break;
@@ -293,7 +307,7 @@ physicsWorld.defaultContactMaterial = Cmaterial
 
         case 's':
 
-            if(event.shiftKey == true && drivingMode)
+            if(event.shiftKey === true && drivingMode)
             {
               if(offset > 0.5)
               offset -= 0.1
@@ -348,9 +362,12 @@ physicsWorld.defaultContactMaterial = Cmaterial
           }
           
           case 'h':
-            {if(drivingMode)
+            if(drivingMode)
                 horn.play();
-            }
+            
+            break
+          default : 
+            break
         
       }
       
@@ -386,6 +403,8 @@ physicsWorld.defaultContactMaterial = Cmaterial
 
           vehicle.vehicle.setSteeringValue(0, 0);
           vehicle.vehicle.setSteeringValue(0, 1);
+          break;
+        default :
           break;
       }
     });
@@ -441,7 +460,7 @@ function createAlphabet(letter, position) {
 
     const iblock = createStructure(7, 28, 8, 'iBlock');
   iblock.body.position.set(40, 10, -20)
-objArr.push(iblock)
+objArr.current.push(iblock)
 // setObjArr([...])
 // setMyArray([...myArray, 'New Item']);
 createAlphabet('I',new THREE.Vector3(40, 9, -20))
@@ -449,32 +468,32 @@ createAlphabet('I',new THREE.Vector3(40, 9, -20))
 
 const dblock = createStructure(3, 7.5, 3, 'dBlock');
 dblock.body.position.set(10, 10, -25.9)
-objArr.push(dblock)
+objArr.current.push(dblock)
 createAlphabet('D',new THREE.Vector3(10, 4, -25.9))
 
 const d2block = createStructure(3, 6.5, 3, 'dBlock');
 d2block.body.position.set(10, 10, -14.7)
-objArr.push(d2block)
+objArr.current.push(d2block)
 
 const ablock = createStructure(10, 14, 8, 'aBlock');
 ablock.body.position.set(15, 10, -55)
-objArr.push(ablock)
+objArr.current.push(ablock)
 createAlphabet('A',new THREE.Vector3(15, 9, -55))
 
 const nblock = createStructure(10, 14, 8, 'nBlock');
 nblock.body.position.set(2, 10, -55)
-objArr.push(nblock)
+objArr.current.push(nblock)
 createAlphabet('N',new THREE.Vector3(2, 9, -55))
 
 
 const bblock = createStructure(10, 14, 8, 'bBlock');
 bblock.body.position.set(45, 10, -55)
-objArr.push(bblock)
+objArr.current.push(bblock)
 createAlphabet('B',new THREE.Vector3(45, 9, -55))
 
 const rroom = createStructure(5, 5, 5, 'bBlock');
 rroom.body.position.set(35, 10, -51)
-objArr.push(rroom)
+objArr.current.push(rroom)
 
 
 
@@ -482,44 +501,44 @@ scene.add(tree)
 
     
 
-    objArr.push(eblock);
+    objArr.current.push(eblock);
     
 
     
     const fblock = createStructure(7,14,8,'fBlock');
     fblock.body.position.set(16.066,10,3)
-    objArr.push(fblock)
+    objArr.current.push(fblock)
     createAlphabet('F',new THREE.Vector3(16.066,9,3))
     
     const behindg = createStructure(9,6,4,'tBlock');
     behindg.body.position.set(20.093,1.0,16.651)
-    objArr.push(behindg)
+    objArr.current.push(behindg)
     createAlphabet('T',new THREE.Vector3(20.093,5.0,16.651))
     // behindg.body.position.set()
 
     const jblock = createStructure(9,6,9,'jBlock')
     jblock.body.position.set(18.372,10,25.256)
-    objArr.push(jblock)
+    objArr.current.push(jblock)
     createAlphabet('J',new THREE.Vector3(18.372,10,25.256))
 
     const eblockext = createStructure(16,8,13,'kBlock');
     eblockext.body.position.set(-0.558,20,21)
-    objArr.push(eblockext)
+    objArr.current.push(eblockext)
     createAlphabet('K',new THREE.Vector3(-0.558,14,21))
     const mblock = createStructure(16,8,13,'mBlock');
     mblock.body.position.set(-0.558,20,30)
-    objArr.push(mblock)
+    objArr.current.push(mblock)
     createAlphabet('M',new THREE.Vector3(-0.558,14,30))
 
     // const gblockb = createStructure(7,8,4);
     const gblock = createStructure(14,7,8.8,'gBlock')
     gblock.body.position.set(14.936,10,-7.434)
-    objArr.push(gblock)
+    objArr.current.push(gblock)
     createAlphabet('G',new THREE.Vector3(14.936,10,-7.434))
 
     const yblock = createStructure(20,7,8,'yBlock')
     yblock.body.position.set(18.377,20,-33.246)
-    objArr.push(yblock);
+    objArr.current.push(yblock);
     createAlphabet('Y',new THREE.Vector3(18.377,9,-33.246))
 
     // for(const obj of objArr){
@@ -581,9 +600,9 @@ const sound = new THREE.Audio( listener );
   // vehicle.carBody.addEventListener('collide',playHitSound)
 
 
-    for(let i = 0;i<objArr.length;i++){
-      scene.add(objArr[i].mesh);
-      physicsWorld.addBody(objArr[i].body)
+    for(let i = 0;i<objArr.current.length;i++){
+      scene.add(objArr.current[i].mesh);
+      physicsWorld.addBody(objArr.current[i].body)
     }
     var prevTime = 0;
     const clock = new THREE.Clock();
@@ -679,7 +698,7 @@ const sound = new THREE.Audio( listener );
       position:new Vec3(0,0,0)
     })
 
-    console.log(pedestal.position)
+    // console.log(pedestal.position)
    
     pedestalBody.position.x = pedestal.position.x + 5
     pedestalBody.position.y = pedestal.position.y
@@ -693,20 +712,28 @@ control.target.set(0, 0, 0); // Set it to your desired target point
 
 // Set the minimum and maximum distances for zooming
 control.minDistance = 5; // Set your desired minimum distance
-control.maxDistance = 90;
+control.maxDistance = 100;
 
 // const fontLoader = new FontLoader()
 
 
 
 
+// const cameraHelp = ()=>{
+//   camera.lookAt(curre)
+// }
+// camera.lookAt(0,0,0)
 
-
-
-    
+camera.position.set(
+  -51.281872432287095
+,
+  36.94968711857934
+,
+  -82.68764870456079)
 
 // const debugRenderer = new CannonDebugRenderer(scene, physicsWorld);
     const animate = () => {
+      // console.log(camera.position)
       // console.log(objArr.length)
       // raycaster.setFromCamera(mouse,camera);
       // const objectsToTest = []
@@ -734,7 +761,7 @@ control.maxDistance = 90;
       physicsWorld.step(1/60,deltaTime,3)
       eblock.mesh.position.copy(eblock.body.position)
    
-      for( const obj of objArr){
+      for( const obj of objArr.current){
         obj.mesh.position.copy(obj.body.position);
         obj.mesh.quaternion.copy(obj.body.quaternion)
         // map.set(obj.mesh,obj.name)
@@ -770,6 +797,34 @@ control.maxDistance = 90;
         sound.pause()
       }
 
+      if(clearSearch.current=== false){
+      if(sceneRef.current){
+        control.enabled = false
+        // console.log("niga searched something")
+        // control.enabled = false
+        // console.log(sceneRef.current.mesh.position)
+
+
+        camera.lookAt(sceneRef.current.mesh.position)
+        // <camera className="lookAt"></camera>
+      // camera.lookAt()
+      // camera.rotation.set(-2.553,-0.5,-2.96)
+      // camera.lookAt(new THREE.Vector3(0,0,0))
+        camera.position.y = 50
+        camera.position.x = -50
+        camera.position.z = -60
+        // camera.setRotationFromEuler(new THREE.Euler(0, 0, 0));
+        // camera.posiion.x = 0
+        // camera.position.x =
+        // camera.lookAt(sceneRef.current.mesh.position)
+      }
+    }
+    else{
+      control.enabled = true
+      // camera.setRotationFromEuler(new THREE.Euler(0, 0, 0));
+    }
+    // console.log(objArr.current.length)
+
       // console.log()
       // restrictZoom(camera,tree.position, minZoom, maxZoom);
       renderer.render(scene,camera);
@@ -792,7 +847,7 @@ control.maxDistance = 90;
     
       
         <div ref={containerRef} style={{ position: 'fixed', top: 0, left: 0, zIndex: -1 }} />;
-    <Paper style={{ margin: '20px', padding: '20px', borderRadius:'10px' }}>
+    {/* <Paper style={{ margin: '20px', padding: '20px', borderRadius:'10px' }}>
       <Typography variant="h4">PSG College of Technology</Typography>
       <Typography variant="body1">
         pinch to zoom out ,
@@ -800,11 +855,11 @@ control.maxDistance = 90;
         "click and drag to navigate the map, command + click to rotate , press ',' to start the vehicle , a, s, d, f to move , h for horn"
 }
       </Typography>
-    </Paper>
+    </Paper> */}
   
 
     
-    <SearchBar placeholder={'search for event'} data = {BookData} selected ={searchBuilding} clear={clear} />
+    <SearchBar placeholder={'search for event'} data = {BookData} selected ={searchBuilding} clear={clear} clearedSearch = {clearedSearch}/>
     </React.Fragment>
 };
 
