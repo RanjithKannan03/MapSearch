@@ -34,19 +34,28 @@ import { Paper, Typography } from '@mui/material';
 const MapSearch = () => {
   const containerRef = useRef(null);
   const [mobile , isMobile] = useState(false);
-  const objArr = [];
-  var originalColors = new Map();
+  const [objArr , setObjArr] = useState([]);
+  // const [originalColors , setOriginalColor]
+  // let objArr = [];
+  // var originalColors = new Map();
+
   const searchBuilding = (value)=>{
+    // console.log('hi in search building')
+
+    // console.log(objArr)
     for(const buildings of objArr){
+        // console.log(buildings)
         if(buildings.name === value){
+          // console.log(value)
+          // console.log(buildings.name)
           buildings.mesh.material.color.set(0xff0000)
         }
     }
   }
   const clear = ()=>{
-  for(const obj of objArr){
-    
-    obj.mesh.material.color.set(originalColors.get(obj.mesh))
+    // console.log("hi in clear")
+  for(let obj of objArr){
+    obj.mesh.material.color.set(0xffffff)
   }
 }
   let scene,camera ,renderer;
@@ -100,10 +109,10 @@ rayDirection.normalize();
     arc.position.set(7.661,0.725,-17.917)
 
     scene.add(hostelEntrance)
-    hostelEntrance.scale.set(0.1,0.1,0.1)
+    hostelEntrance.scale.set(0.01,0.01,0.01)
     scene.add(pedestal)
 
-    hostelEntrance.position.set(-241.99,0,28.959)
+    hostelEntrance.position.set(-80.99,0,10.959)
     
     hostelEntrance.scale.set(0.23,0.23,0.23)
 
@@ -223,7 +232,7 @@ physicsWorld.defaultContactMaterial = Cmaterial
 
     
     
-    const camera = new helicam()
+    camera = new helicam()
     scene.add(camera)
     camera.position.set(-20,19,-60)
     
@@ -423,7 +432,7 @@ function createAlphabet(letter, position) {
     });
 }
 
-
+// let t = 
     const eblock = createStructure(16,8,9,'eBlock')
     eblock.mesh.position.set(-0.558,4,11.641)
     eblock.body.position.set(-0.558,4,11.641)
@@ -433,6 +442,8 @@ function createAlphabet(letter, position) {
     const iblock = createStructure(7, 28, 8, 'iBlock');
   iblock.body.position.set(40, 10, -20)
 objArr.push(iblock)
+// setObjArr([...])
+// setMyArray([...myArray, 'New Item']);
 createAlphabet('I',new THREE.Vector3(40, 9, -20))
 
 
@@ -511,9 +522,9 @@ scene.add(tree)
     objArr.push(yblock);
     createAlphabet('Y',new THREE.Vector3(18.377,9,-33.246))
 
-    for(const obj of objArr){
-      originalColors.set(obj.mesh,obj.color)
-    }
+    // for(const obj of objArr){
+    //   originalColors.set(obj.mesh,obj.color)
+    // }
     
   
     const listener = new THREE.AudioListener();
@@ -696,6 +707,7 @@ control.maxDistance = 90;
 
 // const debugRenderer = new CannonDebugRenderer(scene, physicsWorld);
     const animate = () => {
+      // console.log(objArr.length)
       // raycaster.setFromCamera(mouse,camera);
       // const objectsToTest = []
       // for(const objects of objArr){

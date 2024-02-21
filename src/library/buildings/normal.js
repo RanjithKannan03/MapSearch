@@ -3,11 +3,12 @@ import { Vec3 } from 'cannon-es';
 import * as CANNON from 'cannon-es'
 
 //creating sturcture
-function createStructure(l=1,b=1,h=3,name,colors = 0xffffff){
+function createStructure(l=1,b=1,h=3,name,colors = "white"){
     
     const texture = new THREE.TextureLoader();
     var roomName = [];
     var color = colors
+    console.log(color)
     // var color = this.color
     // const ambientWall = texture.load('/textures/bricks/ambientOcclusion.jpg');
     // const wallcolor = texture.load("/textures/bricks/color.jpg");

@@ -50,10 +50,19 @@ function SearchBar({ placeholder, data, selected,clear }) {
           {filteredData.slice(0, 15).map((value, key) => {
             return (
               <a className="dataItem" onClick={()=>{
-
+                // console.log("hi")
+                // console.log(value.building)
                 clear();
                 selected(value.building)
-              }}>
+              }}
+
+              // onTouchStart={()=>{
+
+              //   clear();
+              //   selected(value.building)
+              // }}
+              
+              >
                 <p>{value.eventName} </p>
                 <p>{value.description}</p>
                 {/* <p>{value.building}</p> */}
