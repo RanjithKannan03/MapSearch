@@ -43,7 +43,7 @@ const MapSearch = () => {
   camera.current = new helicam()
   const control = useRef(null);
   const changed = useRef(false);
-
+  const turnedOff = useRef(false);
   // const scene = useRef
   // const [mobile , isMobile] = useState(false);
   // const [objArr , setObjArr] = useState([]);
@@ -373,13 +373,13 @@ physicsWorld.defaultContactMaterial = Cmaterial
         case ',':
           {
             // console.log("hi from ,")
-            console.log(clearSearch.current)
+            // console.log(clearSearch.current)
             if(clearSearch.current === true){
             if(drivingMode)
             {
               drivingMode = false
               shut.play()
-          
+              turnedOff.current = true;
               break;
             }
             drivingMode = true
@@ -823,8 +823,22 @@ camera.current.position.set(
 
 
       
+      }else if(turnedOff.current === true){
+        camera.current.position.y = 50
+        camera.current.position.x = -50
+        camera.current.position.z = -60
+
+        camera.current.lookAt(tree.position)
+        control.current.target.set(tree.position.x , tree.position.y , tree.position.z);
+        // control.current.target.set(currentSelection.current.mesh.position.x, currentSelection.current.mesh.position.y, currentSelection.current.mesh.position.z);
+
+        console.log("hola")
+        turnedOff.current = false
       }else{
-        // control.current.enabled = true
+        control.current.enabled = true
+        // camera.current.position.y = 50
+        // camera.current.position.x = -50
+        // camera.current.position.z = -60
         // camera.position.set(-10,40,-60)
         sound.pause()
       }
