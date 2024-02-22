@@ -34,10 +34,16 @@ import SearchBar from './SearchBar.jsx';
 
 const MapSearch = () => {
   const containerRef = useRef(null);
-  const clearSearch = useRef(false);
+  const clearSearch = useRef(true);
   const objArr = useRef([]);
   // const searched =
-  const sceneRef = useRef(null);
+  const currentSelection = useRef(null);
+  // const lastSearched = useRef(null);
+  const camera = useRef(null);
+  camera.current = new helicam()
+  const control = useRef(null);
+  const changed = useRef(false);
+
   // const scene = useRef
   // const [mobile , isMobile] = useState(false);
   // const [objArr , setObjArr] = useState([]);
@@ -55,26 +61,45 @@ const MapSearch = () => {
         if(buildings.name === value){
           // console.log(value)
           // console.log(buildings.name)
-          clearSearch.current = false
-          sceneRef.current = buildings
+          // clearSearch.current = false
+          currentSelection.current = buildings
+          // lastSearched.current = buildings
           buildings.mesh.material.color.set(0xff0000)
         }
     }
   }
 
   const clearedSearch = ()=>{
+    
+    // camera.current.lookAt(currentSelection.current.mesh.position)
+    // control.
+    // control.current.target.copy(camera.current.position);÷
+    // control.current.update()
     clearSearch.current = true
+    changed.current = true
+    // console.log(camera.current.position)
+    // currentSelection.current = null
+    // console.log(camera.current);
+  }
+
+  const enableDrive = ()=>{
+    clearSearch.current = true
+    // control.current.update()
+  }
+  const disableDrive = ()=>{
+    clearSearch.current = false
+    // changed.current =
   }
   const clear = ()=>{
-    // console.log("hi in clear")
   for(let obj of objArr.current){
     obj.mesh.material.color.set(0xffffff)
   }
+  // control.current.update()
 }
 
 useEffect(() => {
   
-  let scene,camera ,renderer;
+  let scene,renderer;
     
     scene = new THREE.Scene();
     // if(window.innerWidth < 768)
@@ -245,9 +270,9 @@ physicsWorld.defaultContactMaterial = Cmaterial
 
     
     
-    camera = new helicam()
-    scene.add(camera)
-    camera.position.set(-90,50,-100)
+    
+    scene.add(camera.current)
+    camera.current.position.set(-90,50,-100)
     // camera.lookAt(arc.position)
     
   
@@ -264,8 +289,8 @@ physicsWorld.defaultContactMaterial = Cmaterial
       sizes.height = window.innerHeight
       
       
-      camera.aspect = sizes.width / sizes.height
-      camera.updateProjectionMatrix()
+      camera.current.aspect = sizes.width / sizes.height
+      camera.current.updateProjectionMatrix()
       
       renderer.setSize(sizes.width, sizes.height)
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -347,6 +372,9 @@ physicsWorld.defaultContactMaterial = Cmaterial
 
         case ',':
           {
+            // console.log("hi from ,")
+            console.log(clearSearch.current)
+            if(clearSearch.current === true){
             if(drivingMode)
             {
               drivingMode = false
@@ -358,7 +386,10 @@ physicsWorld.defaultContactMaterial = Cmaterial
             ignition.play()
             sound.play()
             
-            break;
+            break;}
+            else{
+              break;
+            }
           }
           
           case 'h':
@@ -410,13 +441,13 @@ physicsWorld.defaultContactMaterial = Cmaterial
     });
 
 
-    const control = new MapControls(camera,renderer.domElement);
-    control.enableZoom = true
-    control.panSpeed = 1
+    control.current = new MapControls(camera.current,renderer.domElement);
+    control.current.enableZoom = true
+    control.current.panSpeed = 1
     // control.minDistance = 10
 
     
-    control.maxPolarAngle = Math.PI * 0.4
+    control.current.maxPolarAngle = Math.PI * 0.4
 
     const textureLoader = new THREE.TextureLoader();
 const matcapTexture = textureLoader.load('static/textures/textures/matcaps/1.png');
@@ -547,7 +578,7 @@ scene.add(tree)
     
   
     const listener = new THREE.AudioListener();
-  camera.add( listener );
+  camera.current.add( listener );
 
 const sound = new THREE.Audio( listener );
 
@@ -617,7 +648,7 @@ const sound = new THREE.Audio( listener );
 // })
 
     renderer.setPixelRatio(Math.min(2,window.devicePixelRatio))
-    renderer.render(scene,camera);
+    renderer.render(scene,camera.current);
 
 //     window.addEventListener('click', () =>
 // {
@@ -708,11 +739,11 @@ const sound = new THREE.Audio( listener );
 
    
 // control.enableZoom = false;
-control.target.set(0, 0, 0); // Set it to your desired target point
+control.current.target.set(0, 0, 0); // Set it to your desired target point
 
 // Set the minimum and maximum distances for zooming
-control.minDistance = 5; // Set your desired minimum distance
-control.maxDistance = 100;
+control.current.minDistance = 5; // Set your desired minimum distance
+control.current.maxDistance = 100;
 
 // const fontLoader = new FontLoader()
 
@@ -724,13 +755,14 @@ control.maxDistance = 100;
 // }
 // camera.lookAt(0,0,0)
 
-camera.position.set(
+camera.current.position.set(
   -51.281872432287095
 ,
   36.94968711857934
 ,
   -82.68764870456079)
 
+  control.current.update()
 // const debugRenderer = new CannonDebugRenderer(scene, physicsWorld);
     const animate = () => {
       // console.log(camera.position)
@@ -779,55 +811,86 @@ camera.position.set(
 
       
       // console.log(camera.position)
-      if(drivingMode)
+      if(drivingMode === true)
       {
       
-      control.enabled = false
-      camera.rotation.set(-2.553,-0.2705,-2.96)
-      camera.position.y = 20
-      camera.position.x = vehicle.carBody.position.x - 10
-      camera.position.z = vehicle.carBody.position.z - 30
+      control.current.enabled = false
+      camera.current.rotation.set(-2.553,-0.2705,-2.96)
+      camera.current.position.y = 20
+      camera.current.position.x = vehicle.carBody.position.x - 10
+      camera.current.position.z = vehicle.carBody.position.z - 30
       
 
 
       
       }else{
-        control.enabled = true
+        // control.current.enabled = true
         // camera.position.set(-10,40,-60)
         sound.pause()
       }
 
-      if(clearSearch.current=== false){
-      if(sceneRef.current){
-        control.enabled = false
-        // console.log("niga searched something")
-        // control.enabled = false
-        // console.log(sceneRef.current.mesh.position)
+      if(changed.current === true){
 
+        // control.current.enabled = true
 
-        camera.lookAt(sceneRef.current.mesh.position)
-        // <camera className="lookAt"></camera>
-      // camera.lookAt()
-      // camera.rotation.set(-2.553,-0.5,-2.96)
-      // camera.lookAt(new THREE.Vector3(0,0,0))
-        camera.position.y = 50
-        camera.position.x = -50
-        camera.position.z = -60
-        // camera.setRotationFromEuler(new THREE.Euler(0, 0, 0));
-        // camera.posiion.x = 0
-        // camera.position.x =
-        // camera.lookAt(sceneRef.current.mesh.position)
+        camera.current.position.y = 50
+        camera.current.position.x = -50
+        camera.current.position.z = -60
+        // console.log("position")
+        // console.log(camera.current.position)
+        // console.log("looking at")
+        changed.current = false 
+        // <control className="current tar"></control>
+        // control.current.target.set(currentSelection.c)
+        // console.log("hmm");
+        camera.current.lookAt(currentSelection.current.mesh.position)
+        control.current.target.set(currentSelection.current.mesh.position.x, currentSelection.current.mesh.position.y, currentSelection.current.mesh.position.z);
+        // camera.current.updateProjectionMatrix()
+        // // control.current.update()
+        // console.log(currentSelection.current.mesh.position)
+        // control.current.update()
+        // control.current.update()
       }
-    }
-    else{
-      control.enabled = true
-      // camera.setRotationFromEuler(new THREE.Euler(0, 0, 0));
-    }
+
+      // if(clearSearch.current === true){
+      //   // console.log("hola")
+      //   // control.current.update()
+      // }
+
+      // if(clearSearch.current=== false){
+      // if(sceneRef.current){
+      //   control.enabled = false
+      //   // console.log("niga searched something")
+      //   // control.enabled = false
+      //   // console.log(sceneRef.current.mesh.position)
+
+
+      //   // camera.lookAt(sceneRef.current.mesh.position)
+      //   camera.current.lookAt(lastSearched.current.mesh.position)
+      //   // <camera className="lookAt"></camera>
+      // // camera.lookAt()
+      // // camera.rotation.set(-2.553,-0.5,-2.96)
+      // // camera.lookAt(new THREE.Vector3(0,0,0))
+      //   camera.current.position.y = 50
+      //   camera.current.position.x = -50
+      //   camera.current.position.z = -60
+      //   // camera.setRotationFromEuler(new THREE.Euler(0, 0, 0));
+      //   // camera.posiion.x = 0
+      //   // camera.position.x =
+      //   // camera.lookAt(sceneRef.current.mesh.position)
+      // }
+    // }
+    // else{
+    //   control.enabled = true
+    //   // camera.setRotationFromEuler(new THREE.Euler(0, 0, 0));
+    // }
     // console.log(objArr.current.length)
 
       // console.log()
       // restrictZoom(camera,tree.position, minZoom, maxZoom);
-      renderer.render(scene,camera);
+      // control.current.update();
+      renderer.render(scene,camera.current);
+    
      
       window.requestAnimationFrame(animate);
 
@@ -859,7 +922,7 @@ camera.position.set(
   
 
     
-    <SearchBar placeholder={'search for event'} data = {BookData} selected ={searchBuilding} clear={clear} clearedSearch = {clearedSearch}/>
+    <SearchBar placeholder={'search for event'} data = {BookData} selected ={searchBuilding} clear={clear} clearedSearch = {clearedSearch} enableDrive = {enableDrive} disableDrive={ disableDrive}/>
     </React.Fragment>
 };
 
