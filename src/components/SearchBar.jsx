@@ -5,11 +5,12 @@ import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
 
 
-function SearchBar({ placeholder, data, selected,clear , clearedSearch}) {
+function SearchBar({ placeholder, data, selected,clear , clearedSearch,enableDrive, disableDrive}) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
   const handleFilter = (event) => {
+    // setInitial();
     const searchWord = event.target.value;
     setWordEntered(searchWord);
     const newFilter = data.filter((value) => {
@@ -36,6 +37,14 @@ function SearchBar({ placeholder, data, selected,clear , clearedSearch}) {
           placeholder={placeholder}
           value={wordEntered}
           onChange={handleFilter}
+          onFocus={()=>{
+            disableDrive();
+          }}
+          onBlur={()=>{
+            // console.log("ye bitch begone")
+            enableDrive();
+          }}
+          
         />
         <div className="searchIcon">
           {filteredData.length === 0 ? (
@@ -57,6 +66,8 @@ function SearchBar({ placeholder, data, selected,clear , clearedSearch}) {
                 // console.log(value.building)
                 clear();
                 selected(value.building)
+                clearInput();
+                clearedSearch();
               }}
 
               // onTouchStart={()=>{
