@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 function naturalEffect(){
-    const light = new THREE.DirectionalLight(0xffffff)
+    const light = new THREE.DirectionalLight(0xffffff,3)
     light.position.set(20,20,20)
     light.shadow.camera.right = 100
     light.shadow.camera.left = -100
