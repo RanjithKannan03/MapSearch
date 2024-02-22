@@ -165,7 +165,7 @@ const staticObjects = [];
         width: window.innerWidth,
         height: window.innerHeight
     }
-    const floor = land(2000,2000)
+    const floor = land(900,900)
     
     scene.add(floor)
 
@@ -272,7 +272,7 @@ physicsWorld.defaultContactMaterial = Cmaterial
     
     
     scene.add(camera.current)
-    camera.current.position.set(-90,50,-100)
+    // camera.current.position.set(-90,50,-900)
     // camera.lookAt(arc.position)
     
   
@@ -755,17 +755,19 @@ control.current.maxDistance = 100;
 // }
 // camera.lookAt(0,0,0)
 
-camera.current.position.set(
-  -51.281872432287095
+camera.current.position.set
+(
+-46.87550742345333
 ,
-  36.94968711857934
+34.0978102623118
 ,
-  -82.68764870456079)
-
+46.743869285202095
+)
   control.current.update()
 // const debugRenderer = new CannonDebugRenderer(scene, physicsWorld);
     const animate = () => {
-      // console.log(camera.position)
+
+      console.log(camera.current.position)
       // console.log(objArr.length)
       // raycaster.setFromCamera(mouse,camera);
       // const objectsToTest = []
