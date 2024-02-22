@@ -12,7 +12,7 @@
   {
     "eventName": "Auto Minds mastery Challenge: Engine Craft Edition",
     "description": "AUTOMATIVE SIMULATION LABS AND 2+3 WHEELS LAB",
-    "building": ""
+    "building": "kBlock"
   },
   {
     "eventName": "Auto-Mania",
@@ -52,7 +52,7 @@
   {
     "eventName": "Dimensions in Design",
     "description": "A & F CAD LAB",
-    "building": ""
+    "building": "mBlock"
   },
   {
     "eventName": "DrapeTales : Where Every Creator Tells A Tale",
@@ -92,7 +92,7 @@
   {
     "eventName": "Innovation Forge",
     "description": "MECH DESIGN LAB",
-    "building": ""
+    "building": "kBlock"
   },
   {
     "eventName": "Kriya Open Quiz",
@@ -101,13 +101,13 @@
   },
   {
     "eventName": "Load Glider",
-    "description": "CAE (K BLOCK) & N BLOCK GROUND ",
+    "description": "CAE (K BLOCK)",
     "building": "kBlock"
   },
   {
-    "eventName": "Locked & Loaded",
-    "description": "H BLOCK (201,202,203)",
-    "building": "hBlock"
+    "eventName": "Load Glider",
+    "description": "N BLOCK GROUND ",
+    "building": "nBlock"
   },
   {
     "eventName": "Mechmaniacs",
@@ -161,12 +161,12 @@
   },
   {
     "eventName": "Sci - Fiesta ",
-    "description": " G BLOCK (401,402,403)",
+    "description": "G BLOCK (401,402,403)",
     "building": "gBlock"
   },
   {
     "eventName": "Speed Drifters",
-    "description": " N BLOCK",
+    "description": "N BLOCK",
     "building": "nBlock"
   },
   {
@@ -186,8 +186,13 @@
   },
   {
     "eventName": "Tech Spark",
-    "description": "G - 503 & KEYSIGHT MPLS LABS",
+    "description": "G - 503",
     "building": "gBlock"
+  },
+  {
+    "eventName": "Tech Spark",
+    "description": "IC LAB",
+    "building": "eBlock"
   },
   {
     "eventName": "Techvisions",
@@ -208,78 +213,170 @@
     "eventName": "Witty Mindz",
     "description": "K BLOCK (501,502)",
     "building": "kBlock"
+  },
+  {
+    "eventName": "IT Career Forge",
+    "description": "D BLOCK CONFERENCE HALL 1st FLOOR",
+    "building": "dBlock"
+  },
+  {
+    "eventName": "CYBERGUARD",
+    "description": "K-504",
+    "building": "kBlock"
+  },
+  {
+    "eventName": "GREEN GALA",
+    "description": "G-403",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "TECHNORATION",
+    "description": "J-313,314",
+    "building": "jBlock"
+  },
+  {
+    "eventName": "அறிந்தமிழ் கூடல்",
+    "description": "G-305",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Sensor Interface and Integration",
+    "description": "Sensorics Lab (1st Floor, G-Block)",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Immersive Reality - AR",
+    "description": "MI Lab (A Block)",
+    "building": "aBlock"
+  },
+  {
+    "eventName": "Spatial AI in Mobile Robotics",
+    "description": "Y-202",
+    "building": "yBlock"
+  },
+  {
+    "eventName": "Digital Forensics",
+    "description": "CC Lab (E-Block 3rd Floor)",
+    "building": "eBlock"
+  },
+  {
+    "eventName": "GEN AI AND PROMPT ENGINEERING",
+    "description": "IT Main Lab(E block 4th floor)",
+    "building": "eBlock"
+  },
+  {
+    "eventName": "IOT for Mechanical Applications",
+    "description": "G-Block (G-405)",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Data Analytics using R",
+    "description": "IS Lab (K Block 4th Floor)",
+    "building": "kBlock"
+  },
+  {
+    "eventName": "5G Wireless Technologies for various applications",
+    "description": "SKAVA Lab(E block 3rd floor)",
+    "building": "eBlock"
+  },
+  {
+    "eventName": "Fashion Communication",
+    "description": "FT CAD Lab (K Block 3rd Floor)",
+    "building": "kBlock"
+  },
+  {
+    "eventName": "Orionize",
+    "description": "Y-301, Y-302",
+    "building": "yBlock"
+  },
+  {
+    "eventName": "Thermo-Mechanical simulations for manufacturing processes",
+    "description": "G-503",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "Thermo-Mechanical simulations for manufacturing processes",
+    "description": "Centre of Excellence in Welding",
+    "building": "iBlock"
+  },
+  {
+    "eventName": "Transformational Manufacturing - 4.0",
+    "description": "D-Block conference hall (Ground floor)",
+    "building": "dBlock"
+  },
+  {
+    "eventName": "Mixed Reality",
+    "description": "Y - 202",
+    "building": "yBlock"
+  },
+  {
+    "eventName": "A Block",
+    "description": "A Block",
+    "building": "aBlock"
+  },
+  {
+    "eventName": "B Block",
+    "description": "B Block",
+    "building": "bBlock"
+  },
+  {
+    "eventName": "C Block",
+    "description": "C Block",
+    "building": "cBlock"
+  },
+  {
+    "eventName": "D Block",
+    "description": "D Block",
+    "building": "dBlock"
+  },
+  {
+    "eventName": "E Block",
+    "description": "E Block",
+    "building": "eBlock"
+  },
+  {
+    "eventName": "F Block",
+    "description": "F Block",
+    "building": "fBlock"
+  },
+  {
+    "eventName": "G Block",
+    "description": "G Block",
+    "building": "gBlock"
+  },
+  {
+    "eventName": "H Block",
+    "description": "H Block",
+    "building": "hBlock"
+  },
+  {
+    "eventName": "I Block",
+    "description": "I Block",
+    "building": "iBlock"
+  },
+  {
+    "eventName": "J Block",
+    "description": "J Block",
+    "building": "jBlock"
+  },
+  {
+    "eventName": "K Block",
+    "description": "K Block",
+    "building": "kBlock"
+  },
+  {
+    "eventName": "L Block",
+    "description": "L Block",
+    "building": "lBlock"
+  },
+  {
+    "eventName": "M Block",
+    "description": "M Block",
+    "building": "mBlock"
+  },
+  {
+    "eventName": "N Block",
+    "description": "N Block",
+    "building": "nBlock"
   }
-  ,
-    {
-      "eventName": "A Block",
-      "description": "A Block",
-      "building": "aBlock"
-    },
-    {
-      "eventName": "B Block",
-      "description": "B Block",
-      "building": "bBlock"
-    },
-    {
-      "eventName": "C Block",
-      "description": "C Block",
-      "building": "cBlock"
-    },
-    {
-      "eventName": "D Block",
-      "description": "D Block",
-      "building": "dBlock"
-    },
-    {
-      "eventName": "E Block",
-      "description": "E Block",
-      "building": "eBlock"
-    },
-    {
-      "eventName": "F Block",
-      "description": "F Block",
-      "building": "fBlock"
-    },
-    {
-      "eventName": "G Block",
-      "description": "G Block",
-      "building": "gBlock"
-    },
-    {
-      "eventName": "H Block",
-      "description": "H Block",
-      "building": "hBlock"
-    },
-    {
-      "eventName": "I Block",
-      "description": "I Block",
-      "building": "iBlock"
-    },
-    {
-      "eventName": "J Block",
-      "description": "J Block",
-      "building": "jBlock"
-    },
-    {
-      "eventName": "K Block",
-      "description": "K Block",
-      "building": "kBlock"
-    },
-    {
-      "eventName": "L Block",
-      "description": "L Block",
-      "building": "lBlock"
-    },
-    {
-      "eventName": "M Block",
-      "description": "M Block",
-      "building": "mBlock"
-    },
-    {
-      "eventName": "N Block",
-      "description": "N Block",
-      "building": "nBlock"
-    }
-  
-  
 ]
